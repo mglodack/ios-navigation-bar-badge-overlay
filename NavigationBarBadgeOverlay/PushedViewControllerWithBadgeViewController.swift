@@ -29,19 +29,16 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
         label.layer.masksToBounds = true
         
         let insetLabel = InsetUILabel()
-        insetLabel.contentInsets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         
         self.badgeLabel = insetLabel
-        badgeLabel?.text = "100"
+        badgeLabel?.text = "10000"
         badgeLabel?.backgroundColor = .white
         badgeLabel?.textColor = .red
-        badgeLabel?.sizeToFit()
         badgeLabel?.translatesAutoresizingMaskIntoConstraints = false
         badgeLabel?.textAlignment = .center
         badgeLabel?.layer.masksToBounds = true
         badgeLabel?.numberOfLines = 1
-        badgeLabel?.minimumScaleFactor = 0.5
-        badgeLabel?.adjustsFontSizeToFitWidth = true
+        badgeLabel?.font = badgeLabel?.font.withSize(4)
         
         let backButtonView = UIView()
         backButtonView.backgroundColor = .clear
@@ -51,7 +48,9 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
         backButtonView.addSubview(imageView)
         backButtonView.addSubview(label)
         backButtonView.addSubview(badgeLabel!)
-        
+
+        label.contentHuggingPriority(for: .vertical)
+
         // Add constraints for chevron + label within UIView
         backButtonView.addConstraints([
             // UIImageView constraints
@@ -65,6 +64,8 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
             // UILabel badge constraints
             badgeLabel!.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 3),
             badgeLabel!.widthAnchor.constraint(equalTo: badgeLabel!.heightAnchor),
+            
+            badgeLabel!.heightAnchor.constraint(lessThanOrEqualToConstant: 30),
             
             badgeLabel!.topAnchor.constraint(equalTo: label.topAnchor),
             badgeLabel!.bottomAnchor.constraint(equalTo: label.bottomAnchor)
