@@ -13,6 +13,7 @@
 		582FBE3A22A5990F008C024E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 582FBE3922A5990F008C024E /* Assets.xcassets */; };
 		582FBE3D22A5990F008C024E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 582FBE3B22A5990F008C024E /* LaunchScreen.storyboard */; };
 		582FBE4522A59A63008C024E /* PushedViewControllerWithBadgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582FBE4422A59A63008C024E /* PushedViewControllerWithBadgeViewController.swift */; };
+		582FBE4722A5E3F0008C024E /* InsetUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582FBE4622A5E3F0008C024E /* InsetUILabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		582FBE3C22A5990F008C024E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		582FBE3E22A5990F008C024E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		582FBE4422A59A63008C024E /* PushedViewControllerWithBadgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushedViewControllerWithBadgeViewController.swift; sourceTree = "<group>"; };
+		582FBE4622A5E3F0008C024E /* InsetUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetUILabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				582FBE3B22A5990F008C024E /* LaunchScreen.storyboard */,
 				582FBE3E22A5990F008C024E /* Info.plist */,
 				582FBE4422A59A63008C024E /* PushedViewControllerWithBadgeViewController.swift */,
+				582FBE4622A5E3F0008C024E /* InsetUILabel.swift */,
 			);
 			path = NavigationBarBadgeOverlay;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				582FBE3522A5990E008C024E /* ViewController.swift in Sources */,
 				582FBE3322A5990E008C024E /* AppDelegate.swift in Sources */,
+				582FBE4722A5E3F0008C024E /* InsetUILabel.swift in Sources */,
 				582FBE4522A59A63008C024E /* PushedViewControllerWithBadgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
