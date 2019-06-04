@@ -56,7 +56,7 @@ public final class UIButtonWithBadge: UIButton {
         view.isUserInteractionEnabled = false
 
         let imageView = UIButtonWithBadge.createImageView()
-        let titleLabel = UIButtonWithBadge.createTitleLabel("Songs")
+        let titleLabel = UIButtonWithBadge.createTitleLabel("Books")
         
         view.addSubview(imageView)
         view.addSubview(titleLabel)
