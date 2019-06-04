@@ -13,6 +13,7 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
     var backButton: UIButton?
     var backBarButtonItem: UIBarButtonItem?
     var badgeLabel: UILabel?
+    var backBarButtonView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +39,18 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
         badgeLabel?.textAlignment = .center
         badgeLabel?.layer.masksToBounds = true
         badgeLabel?.numberOfLines = 1
-        badgeLabel?.font = badgeLabel?.font.withSize(4)
         
         let backButtonView = UIView()
-        backButtonView.backgroundColor = .clear
+        backButtonView.backgroundColor = .orange
         backButtonView.translatesAutoresizingMaskIntoConstraints = false
+        backButtonView.isUserInteractionEnabled = false
         
         // Add chevron + label to UIView
         backButtonView.addSubview(imageView)
         backButtonView.addSubview(label)
         backButtonView.addSubview(badgeLabel!)
+        
+        self.backBarButtonView = backButtonView
 
         label.contentHuggingPriority(for: .vertical)
 
@@ -65,7 +68,7 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
             badgeLabel!.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 3),
             badgeLabel!.widthAnchor.constraint(equalTo: badgeLabel!.heightAnchor),
             
-            badgeLabel!.heightAnchor.constraint(lessThanOrEqualToConstant: 30),
+            badgeLabel!.heightAnchor.constraint(lessThanOrEqualToConstant: 25),
             
             badgeLabel!.topAnchor.constraint(equalTo: label.topAnchor),
             badgeLabel!.bottomAnchor.constraint(equalTo: label.bottomAnchor)
@@ -77,31 +80,36 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(navigateBack), for: .touchUpInside)
         button.addSubview(backButtonView)
-        
+        button.contentMode = .center
+        button.isUserInteractionEnabled = true
+
         button.addConstraints([
-            button.leadingAnchor.constraint(equalTo: backButtonView.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: backButtonView.trailingAnchor),
-            button.topAnchor.constraint(equalTo: backButtonView.topAnchor),
-            button.bottomAnchor.constraint(equalTo: backButtonView.bottomAnchor),
+            backButtonView.leadingAnchor.constraint(equalTo: button.leadingAnchor),
+            backButtonView.trailingAnchor.constraint(equalTo: button.trailingAnchor),
+            backButtonView.bottomAnchor.constraint(equalTo: button.bottomAnchor),
+            backButtonView.topAnchor.constraint(equalTo: button.topAnchor)
             ])
-        
+
         button.translatesAutoresizingMaskIntoConstraints = false
         self.backButton = button
-        
-        button.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         
         self.backBarButtonItem = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = self.backBarButtonItem
     }
     
     @objc public func navigateBack() {
-        print("back")
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.backButton?.layoutIfNeeded()
+        if let backView = self.backBarButtonView, let lastView = backView.subviews.last, let backButton = self.backButton {
+            
+            backButton.frame.size.width = lastView.frame.origin.x + lastView.frame.width
+            
+            self.backBarButtonItem?.width = backButton.frame.size.width
+        }
         
         if let badge = self.badgeLabel {
             badge.layer.cornerRadius = badge.frame.size.width / 2
