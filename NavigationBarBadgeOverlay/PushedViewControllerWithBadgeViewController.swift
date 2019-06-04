@@ -10,10 +10,8 @@ import UIKit
 
 class PushedViewControllerWithBadgeViewController: UIViewController {
 
-    var backButton: UIButtonWithBadge?
+    var buttonWithBadge: UIButtonWithBadge?
     var backBarButtonItem: UIBarButtonItem?
-    var badgeLabel: UILabel?
-    var backBarButtonView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +20,7 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
         
         let button = UIButtonWithBadge()
         button.addTarget(self, action: #selector(navigateBack), for: .touchUpInside)
-        self.backButton = button
+        self.buttonWithBadge = button
         
         self.backBarButtonItem = UIBarButtonItem(customView: button)
         self.navigationItem.leftBarButtonItem = self.backBarButtonItem
@@ -35,10 +33,10 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        if let backButton = self.backButton {
-            backButton.viewDidLayoutSubviews()
+        if let buttonWithBadge = self.buttonWithBadge {
+            buttonWithBadge.viewDidLayoutSubviews()
             
-            self.backBarButtonItem?.width = backButton.desiredWidth
+            self.backBarButtonItem?.width = buttonWithBadge.desiredWidth
         }
     }
 }
