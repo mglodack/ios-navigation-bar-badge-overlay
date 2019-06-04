@@ -32,16 +32,17 @@ class PushedViewControllerWithBadgeViewController: UIViewController {
         let insetLabel = InsetUILabel()
         
         self.badgeLabel = insetLabel
-        badgeLabel?.text = "10000"
+        badgeLabel?.text = "1"
         badgeLabel?.backgroundColor = .white
         badgeLabel?.textColor = .red
         badgeLabel?.translatesAutoresizingMaskIntoConstraints = false
         badgeLabel?.textAlignment = .center
         badgeLabel?.layer.masksToBounds = true
         badgeLabel?.numberOfLines = 1
+        badgeLabel?.font = badgeLabel?.font.withSize(12)
         
         let backButtonView = UIView()
-        backButtonView.backgroundColor = .orange
+        backButtonView.backgroundColor = .clear
         backButtonView.translatesAutoresizingMaskIntoConstraints = false
         backButtonView.isUserInteractionEnabled = false
         
