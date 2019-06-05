@@ -32,7 +32,11 @@ public final class UIButtonWithBadge: UIButton {
             view.topAnchor.constraint(equalTo: self.topAnchor)
             ])
     }
-    
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     public var desiredWidth: CGFloat {
         let frame = badgeLabel.frame
         
@@ -45,8 +49,18 @@ public final class UIButtonWithBadge: UIButton {
         badgeLabel.layer.cornerRadius = badgeLabel.frame.size.width / 2
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public func updateBadgeText(text: String?) {
+        if text == nil || text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            badgeLabel.isHidden = true
+        } else {
+            badgeLabel.isHidden = false
+            badgeLabel.text = text
+            
+            self.layoutSubviews()
+            self.layoutIfNeeded()
+            
+            viewDidLayoutSubviews()
+        }
     }
     
     fileprivate static func createCustomView(_ badgeLabel: UILabel) -> UIView {
@@ -77,10 +91,8 @@ public final class UIButtonWithBadge: UIButton {
             badgeLabel.widthAnchor.constraint(equalTo: badgeLabel.heightAnchor),
             
             badgeLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 40),
-            
-            badgeLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-            badgeLabel.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor)
-            ])
+            badgeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
         
         return view
     }
@@ -113,7 +125,7 @@ public final class UIButtonWithBadge: UIButton {
             bottom: 2,
             right: 2)
         
-        insetLabel.text = "111k"
+        insetLabel.text = nil
         insetLabel.backgroundColor = .white
         insetLabel.textColor = .red
         insetLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -121,6 +133,10 @@ public final class UIButtonWithBadge: UIButton {
         insetLabel.layer.masksToBounds = true
         insetLabel.numberOfLines = 1
         insetLabel.font = insetLabel.font.withSize(12)
+        
+        if insetLabel.text == nil {
+            insetLabel.isHidden = true
+        }
         
         return insetLabel
     }
